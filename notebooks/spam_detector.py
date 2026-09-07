@@ -1,3 +1,4 @@
+import joblib
 import pandas as pd
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,7 +10,7 @@ from sklearn.metrics import accuracy_score
 
 # Load real SMS Spam Collection dataset
 df = pd.read_csv(
-    "dataset/SMSSpamCollection",
+    "notebooks/dataset/SMSSpamCollection",
     sep="\t",
     header=None,
     names=["label", "message"]
@@ -42,6 +43,8 @@ model = Pipeline([
 
 # Train model
 model.fit(X_train, y_train)
+joblib.dump(model, "spam_model.pkl")
+print("Model saved successfully!")
 
 print("Model training completed!")
 
